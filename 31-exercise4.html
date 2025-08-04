@@ -236,7 +236,44 @@
 
         </div>
 
-        <script src="js/ex4.js"></script>
+        <script>
+            //#1
+            var shipments = {
+                    'standard': {
+                        'leadTime': 7,
+                        'fee': 2
+                    },
+                    'express': {
+                        'leadTime': 3,
+                        'fee': 4.5
+                    }
+                };
+            const date = new Date();
+            let today = date.getTime();
+            document.getElementById("shipments").onchange = (element) =>{
+                let optionsList = document.getElementsByTagName("option");
+                let expectedDate;
+                let deliveryFee;
+
+                for(option of optionsList){
+                    
+                    if(option.value !== "choose" && option.selected){
+                        expectedDate = shipments[option.value].leadTime;
+                        deliveryFee = shipments[option.value].fee;
+
+                        expectedDate = expectedDate * (1000 * 60 * 60 * 24); //To get the days in miliseconds
+                    }
+                }
+
+                let finalDate = new Date(today + expectedDate).toISOString().split('T')[0];
+                console.log(finalDate)
+                document.getElementById("order_date").innerHTML = finalDate;
+                document.getElementById("delivery_date").innerHTML = expectedDate;
+                document.getElementById("delivery_fee").innerHTML = deliveryFee;
+
+               
+            }
+        </script>
 
     </body>
 
