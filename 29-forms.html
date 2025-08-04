@@ -221,8 +221,46 @@
             </main>
 
         </div>
+ 
+        <script>
 
-        <script src="js/scripts.js"></script>
+            //Select box
+            document.getElementById("show_option").onclick = () =>{
+                let options = document.getElementById("options").options;
+                let indexSelected = document.getElementById("options").options.selectedIndex;
+                document.getElementById("selected_option").innerText = ` ${options[indexSelected].innerText}`;
+            }
+
+            //Radio button
+            document.getElementById("show_radio").onclick = () => {
+                let radioSelected;
+                let radioOptionList = document.getElementsByName("gender");
+
+                radioOptionList.forEach((radioElement) => {
+                    radioElement.checked ? radioSelected = radioElement.value : "";
+                });
+
+                document.getElementById("selected_radio").innerHTML = radioSelected;
+            }
+
+            //CheckBoxes
+            let controller = false
+            document.getElementById("show_check").innerHTML = "Add to list"
+            document.getElementById("show_check").onclick = () =>{
+                let checkboxList = document.getElementsByName("interest");
+                let checkboxSelected = "";
+                let text = document.getElementById("show_check");
+
+                checkboxList.forEach((checkboxElement) => {
+                    checkboxElement.checked ? checkboxSelected += `<li>${checkboxElement.value}</li>` : "";
+                });
+
+                checkboxSelected == "" ? text.innerHTML = "Add to list" : text.innerHTML = "Update list";
+                document.getElementById("selected_check").innerHTML = `<ul>${checkboxSelected}</ul>`
+            }
+
+            
+        </script>
 
     </body>
 
